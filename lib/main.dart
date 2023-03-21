@@ -64,12 +64,27 @@ class MyHomePage extends StatelessWidget {
                         style: BorderStyle.solid,
                       ),
                     ),
-                    child: Text(tx.amount.toString()),
+                    child: Text("${tx.amount.toString()} /- Rs.",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.purple,
+                        )),
                   ),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(tx.title),
-                      Text(tx.date.toString())
+                      Text(
+                        tx.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        tx.date.toString(),
+                        style: TextStyle(color: Colors.grey),
+                      )
                     ],
                   )
                 ]),
