@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import './widgets/new_Transaction.dart';
 import './widgets/transactionList.dart';
