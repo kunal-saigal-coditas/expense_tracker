@@ -11,10 +11,11 @@ class myApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: TextTheme(titleMedium: TextStyle(color: Colors.white)),
-        primarySwatch: Colors.deepPurple,
-        fontFamily: 'Quicksand',
-      ),
+          textTheme: TextTheme(titleMedium: TextStyle(color: Colors.white)),
+          primarySwatch: Colors.deepPurple,
+          fontFamily: 'Quicksand',
+          appBarTheme:
+              AppBarTheme(textTheme: ThemeData.light().textTheme.copyWith())),
       title: "Tracker Your Expenses",
       home: MyHomePage(),
     );
@@ -27,10 +28,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // String titleInput;
-  // final titleController = TextEditingController();
-  // final amountController = TextEditingController();
-
   final List<Transaction> _userTransaction = [
     Transaction(
       id: "t1",
