@@ -13,6 +13,7 @@ class myApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: TextTheme(titleMedium: TextStyle(color: Colors.white)),
         primarySwatch: Colors.deepPurple,
+        fontFamily: 'Quicksand',
       ),
       title: "Tracker Your Expenses",
       home: MyHomePage(),
