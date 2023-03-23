@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import './widgets/new_Transaction.dart';
 import './widgets/transactionList.dart';
 import './models/transaction.dart';
+import './widgets/menu.dart';
 
 void main() => runApp(myApp());
 
@@ -9,6 +12,10 @@ class myApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: TextTheme(titleMedium: TextStyle(color: Colors.white)),
+        primarySwatch: Colors.deepPurple,
+      ),
       title: "Tracker Your Expenses",
       home: MyHomePage(),
     );
@@ -68,6 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawers(
+        handler: _startAddNewTransaction,
+      ),
       appBar: AppBar(
         title: Text("Expense Tracker"),
         actions: <Widget>[
@@ -77,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.white,
             ),
             onPressed: () => _startAddNewTransaction(context),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -91,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Card(
                 child: Container(
                   child: Text("Chart"),
-                  color: Colors.blueAccent,
+                  color: Theme.of(context).primaryColor,
                   width: 100,
                 ),
                 elevation: 5,
