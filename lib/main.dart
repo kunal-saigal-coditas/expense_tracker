@@ -11,11 +11,21 @@ class myApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          textTheme: TextTheme(titleMedium: TextStyle(color: Colors.white)),
-          primarySwatch: Colors.deepPurple,
-          fontFamily: 'Quicksand',
-          appBarTheme:
-              AppBarTheme(textTheme: ThemeData.light().textTheme.copyWith())),
+        textTheme: TextTheme(titleMedium: TextStyle(color: Colors.black)),
+        primarySwatch: Colors.deepPurple,
+        fontFamily: 'Quicksand',
+        primaryTextTheme: ThemeData.dark().textTheme.copyWith(
+                titleMedium: TextStyle(
+              fontFamily: "OpenSans",
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            )),
+        appBarTheme: AppBarTheme(
+          textTheme: ThemeData.dark().textTheme.copyWith(
+                titleMedium: TextStyle(fontFamily: 'OpenSans', fontSize: 20),
+              ),
+        ),
+      ),
       title: "Tracker Your Expenses",
       home: MyHomePage(),
     );
