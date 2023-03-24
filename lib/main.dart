@@ -14,7 +14,7 @@ class myApp extends StatelessWidget {
         textTheme: TextTheme(titleMedium: TextStyle(color: Colors.black)),
         primarySwatch: Colors.deepPurple,
         fontFamily: 'Quicksand',
-        primaryTextTheme: ThemeData.dark().textTheme.copyWith(
+        primaryTextTheme: ThemeData.light().textTheme.copyWith(
                 titleMedium: TextStyle(
               fontFamily: "OpenSans",
               fontWeight: FontWeight.bold,
@@ -26,6 +26,7 @@ class myApp extends StatelessWidget {
               ),
         ),
       ),
+      debugShowCheckedModeBanner: false,
       title: "Tracker Your Expenses",
       home: MyHomePage(),
     );
@@ -106,7 +107,10 @@ class _MyHomePageState extends State<MyHomePage> {
               width: double.infinity,
               child: Card(
                 child: Container(
-                  child: Text("Chart"),
+                  child: Text(
+                    "Chart",
+                    style: TextStyle(color: Colors.white),
+                  ),
                   color: Theme.of(context).primaryColor,
                   width: 100,
                 ),
@@ -117,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
