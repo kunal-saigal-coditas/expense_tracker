@@ -31,14 +31,35 @@ class _NewTransactionState extends State<NewTransaction> {
     Navigator.of(context).pop();
   }
 
+  bool changes = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      child: Container(
+      child: AnimatedContainer(
+        duration: Duration(seconds: 1),
         padding: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
+            InkWell(
+              onTap: () {
+                setState(() {
+                  changes = true;
+                });
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                ),
+                padding: EdgeInsets.all(10),
+                // padding: EdgeInsets.all(changes ? 50 : 10),
+                child: Text(
+                  "Click Me",
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
             TextField(
               decoration: InputDecoration(labelText: "Title"),
               controller: titleController,
