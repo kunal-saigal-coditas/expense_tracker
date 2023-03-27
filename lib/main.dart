@@ -18,15 +18,25 @@ class myApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         fontFamily: 'Quicksand',
         primaryTextTheme: ThemeData.light().textTheme.copyWith(
-                titleMedium: TextStyle(
+            titleMedium: TextStyle(
               fontFamily: "OpenSans",
               fontWeight: FontWeight.bold,
               fontSize: 18,
-            )),
+            ),
+            labelLarge: TextStyle(color: Colors.white)),
         appBarTheme: AppBarTheme(
-          textTheme: ThemeData.dark().textTheme.copyWith(
+          toolbarTextStyle: ThemeData.dark()
+              .textTheme
+              .copyWith(
                 titleMedium: TextStyle(fontFamily: 'OpenSans', fontSize: 20),
-              ),
+              )
+              .bodyMedium,
+          titleTextStyle: ThemeData.dark()
+              .textTheme
+              .copyWith(
+                titleMedium: TextStyle(fontFamily: 'OpenSans', fontSize: 20),
+              )
+              .titleLarge,
         ),
       ),
       // debugShowCheckedModeBanner: false,
@@ -42,20 +52,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransaction = [
-    // Transaction(
-    //   id: "t1",
-    //   title: "Sneakers",
-    //   amount: 1500,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: "t1",
-    //   title: "Groceries",
-    //   amount: 500,
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<Transaction> _userTransaction = [];
 
   List<Transaction> get _recentTransaction {
     return _userTransaction
