@@ -29,7 +29,7 @@ class myApp extends StatelessWidget {
               ),
         ),
       ),
-      debugShowCheckedModeBanner: false,
+      // debugShowCheckedModeBanner: false,
       title: "Tracker Your Expenses",
       home: MyHomePage(),
     );
