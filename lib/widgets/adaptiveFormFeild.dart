@@ -12,22 +12,24 @@ class AdaptiveFormFeild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Platform.isIOS
-        ? Column(children: [
-            CupertinoTextField(
-              placeholder: "Title",
-              controller: title,
-              onSubmitted: (_) => submit,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            CupertinoTextField(
-              placeholder: "Amount",
-              controller: amount,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => submit,
-            ),
-          ])
+        ? Column(
+            children: [
+              CupertinoTextField(
+                placeholder: "Title",
+                controller: title,
+                onSubmitted: (_) => submit,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              CupertinoTextField(
+                placeholder: "Amount",
+                controller: amount,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => submit,
+              ),
+            ],
+          )
         : Column(
             children: [
               TextField(
