@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_complete_guide/widgets/adaptiveFormFeild.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 import 'adaptiveButton.dart';
@@ -74,19 +75,10 @@ class _NewTransactionState extends State<NewTransaction> {
               bottom: MediaQuery.of(context).viewInsets.bottom + 10),
           child: Column(
             children: <Widget>[
-              TextField(
-                decoration: InputDecoration(labelText: "Title"),
-                controller: _titleController,
-                onSubmitted: (_) => _submitData(),
-                // onChanged: (val) => titleInput = val,
-              ),
-              TextField(
-                decoration: InputDecoration(labelText: "Amount"),
-                controller: _amountController,
-                keyboardType: TextInputType.number,
-                onSubmitted: (_) => _submitData(),
-                // onChanged: (val) => amountInput = val,
-              ),
+              AdaptiveFormFeild(
+                  amount: _amountController,
+                  title: _titleController,
+                  submit: _submitData),
               Container(
                 height: 60,
                 child: Row(
