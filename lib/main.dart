@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './widgets/new_Transaction.dart';
 import './widgets/transactionList.dart';
@@ -98,18 +100,33 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    final appBar = AppBar(
-      title: Text("Expense Tracker"),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          onPressed: () => _startAddNewTransaction(context),
-        ),
-      ],
-    );
+    final PreferredSizeWidget appBar = Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text("Personal Expenses"),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: Icon(
+                    CupertinoIcons.add,
+                  ),
+                  onTap: () => _startAddNewTransaction(context),
+                ),
+              ],
+            ),
+          )
+        : AppBar(
+            title: Text("Expense Tracker"),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                onPressed: () => _startAddNewTransaction(context),
+              ),
+            ],
+          );
 
     final txListWidget = Container(
       height: (mediaQuery.size.height -
@@ -119,12 +136,8 @@ class _MyHomePageState extends State<MyHomePage> {
       child: TransactionList(_userTransaction, _deleteTransaction),
     );
 
-    return Scaffold(
-      appBar: appBar,
-      drawer: Drawers(
-        handler: _startAddNewTransaction,
-      ),
-      body: SingleChildScrollView(
+    final pageBody = SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -134,8 +147,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.all(6),
                 child: Row(
                   children: [
-                    Text("Show Chart"),
-                    Switch(
+                    Text(
+                      "Show Chart",
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Switch.adaptive(
+                      activeColor: Theme.of(context).primaryColor,
                       value: _showChart,
                       onChanged: (val) {
                         setState(
@@ -170,11 +187,26 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
-      ),
     );
+
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            child: pageBody,
+            navigationBar: appBar,
+          )
+        : Scaffold(
+            appBar: appBar,
+            drawer: Drawers(
+              handler: _startAddNewTransaction,
+            ),
+            body: pageBody,
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    child: Icon(Icons.add),
+                    onPressed: () => _startAddNewTransaction(context),
+                  ),
+          );
   }
 }

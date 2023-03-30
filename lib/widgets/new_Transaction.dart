@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
+import 'adaptiveButton.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addTx;
@@ -71,24 +74,6 @@ class _NewTransactionState extends State<NewTransaction> {
               bottom: MediaQuery.of(context).viewInsets.bottom + 10),
           child: Column(
             children: <Widget>[
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    changes = true;
-                  });
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black),
-                  ),
-                  padding: EdgeInsets.all(10),
-                  // padding: EdgeInsets.all(changes ? 50 : 10),
-                  child: Text(
-                    "Click Me",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
               TextField(
                 decoration: InputDecoration(labelText: "Title"),
                 controller: _titleController,
@@ -114,18 +99,10 @@ class _NewTransactionState extends State<NewTransaction> {
                             : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                       ),
                     ),
-                    TextButton(
-                      style: ButtonStyle(
-                        textStyle: MaterialStateProperty.all(
-                          TextStyle(color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                      onPressed: _presentDatePicker,
-                      child: Text(
-                        "Choose Date",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    AdaptiveButton(
+                      text: "Choose Date",
+                      handler: _presentDatePicker,
+                    )
                   ],
                 ),
               ),
