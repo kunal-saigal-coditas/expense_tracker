@@ -59,88 +59,95 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: AnimatedContainer(
-        duration: Duration(seconds: 1),
-        padding: EdgeInsets.all(10),
-        child: Column(
-          children: <Widget>[
-            InkWell(
-              onTap: () {
-                setState(() {
-                  changes = true;
-                });
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                ),
-                padding: EdgeInsets.all(10),
-                // padding: EdgeInsets.all(changes ? 50 : 10),
-                child: Text(
-                  "Click Me",
-                  style: TextStyle(color: Colors.black),
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: AnimatedContainer(
+          duration: Duration(seconds: 1),
+          padding: EdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+          child: Column(
+            children: <Widget>[
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    changes = true;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                  ),
+                  padding: EdgeInsets.all(10),
+                  // padding: EdgeInsets.all(changes ? 50 : 10),
+                  child: Text(
+                    "Click Me",
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ),
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: "Title"),
-              controller: _titleController,
-              onSubmitted: (_) => _submitData(),
-              // onChanged: (val) => titleInput = val,
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: "Amount"),
-              controller: _amountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => _submitData(),
-              // onChanged: (val) => amountInput = val,
-            ),
-            Container(
-              height: 60,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Expanded(
-                    child: Text(
-                      _selectedDate == null
-                          ? 'No Date Chosen'
-                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
-                    ),
-                  ),
-                  TextButton(
-                    style: ButtonStyle(
-                      textStyle: MaterialStateProperty.all(
-                        TextStyle(color: Theme.of(context).primaryColor),
+              TextField(
+                decoration: InputDecoration(labelText: "Title"),
+                controller: _titleController,
+                onSubmitted: (_) => _submitData(),
+                // onChanged: (val) => titleInput = val,
+              ),
+              TextField(
+                decoration: InputDecoration(labelText: "Amount"),
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => _submitData(),
+                // onChanged: (val) => amountInput = val,
+              ),
+              Container(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        _selectedDate == null
+                            ? 'No Date Chosen'
+                            : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                       ),
                     ),
-                    onPressed: _presentDatePicker,
-                    child: Text(
-                      "Choose Date",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    TextButton(
+                      style: ButtonStyle(
+                        textStyle: MaterialStateProperty.all(
+                          TextStyle(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                      onPressed: _presentDatePicker,
+                      child: Text(
+                        "Choose Date",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            ElevatedButton(
-              onPressed: _submitData,
-              child: Text(
-                "Add Transaction",
-                style: TextStyle(
-                    color: Theme.of(context).primaryTextTheme.labelLarge.color),
-              ),
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all(
-                  Theme.of(context).primaryColor,
+                  ],
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 30,
+              ),
+              ElevatedButton(
+                onPressed: _submitData,
+                child: Text(
+                  "Add Transaction",
+                  style: TextStyle(
+                      color:
+                          Theme.of(context).primaryTextTheme.labelLarge.color),
+                ),
+                style: ButtonStyle(
+                  foregroundColor: MaterialStateProperty.all(
+                    Theme.of(context).primaryColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
